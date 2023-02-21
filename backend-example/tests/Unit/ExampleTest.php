@@ -2,7 +2,10 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use App\Models\Permission;
+use App\Models\Role;
+use Tests\TestCase;
+
 
 class ExampleTest extends TestCase
 {
@@ -13,6 +16,10 @@ class ExampleTest extends TestCase
      */
     public function test_that_true_is_true()
     {
-        $this->assertTrue(true);
+        $role = Role::create(['name' => 'normal users']);
+        $permission = Permission::create(['name' => 'edit articlesss']);
+        $role->givePermissionTo($permission);
+        $permission->assignRole($role);
+        dd($role);
     }
 }
